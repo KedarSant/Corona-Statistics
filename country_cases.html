@@ -1,0 +1,368 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+            integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <title>Covid-19 Cases by country</title>
+
+        <!-- Custom styles -->
+        <style>
+            .bd-placeholder-img {
+                font-size: 1.125rem;
+                text-anchor: middle;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            @media (min-width: 768px) {
+                .bd-placeholder-img-lg {
+                    font-size: 3.5rem;
+                }
+            }
+
+            /* Make The Menu Scrollable */
+
+            .scrollable-menu {
+                height: auto;
+                max-height: 200px;
+                overflow-x: hidden;
+            }
+
+            /* Sidebar */
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 100; /* Behind the navbar */
+                padding: 48px 0 0; /* Height of navbar */
+                box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            }
+
+            @media (max-width: 767.98px) {
+                .sidebar {
+                    top: 5rem;
+                }
+            }
+
+            @media (max-width: 1024px) {
+                .sidebar {
+                    padding: 250px 0 0;
+                }
+            }
+
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+                height: calc(100vh - 48px);
+                padding-top: .5rem;
+                overflow-x: hidden;
+                overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+            }
+
+            @supports ((position: -webkit-sticky) or (position: sticky)) {
+                .sidebar-sticky {
+                    position: -webkit-sticky;
+                    position: sticky;
+                }
+            }
+
+            .sidebar .nav-link {
+                font-weight: 500;
+                color: #333;
+            }
+
+            .sidebar .nav-link .feather {
+                margin-right: 4px;
+                color: #999;
+            }
+
+            .sidebar .nav-link.active {
+                color: #007bff;
+            }
+
+            .sidebar .nav-link:hover .feather,
+            .sidebar .nav-link.active .feather {
+                color: inherit;
+            }
+
+            .sidebar-heading {
+                font-size: .75rem;
+                text-transform: uppercase;
+            }
+
+            hr{
+                height: 10px;
+            }
+
+        </style>
+
+    </head>
+    <body>
+
+        <!-- Navbar -->
+        <header>
+            <nav class="navbar sticky-top bg-dark shadow bg-dark navbar-expand-lg navbar-dark bg-dark">
+                <h1 class="mb-0 navbar-brand">COVID-19 Visualization</h1>
+                <ul class='navbar-nav px-3'>
+                    <li class='nav-item'><a class='nav-link' href="index.html">HOME</a></li>
+                    <li class='nav-item active'><a class='nav-link' href="country_cases.html">Country-Wise Distribution</a></li>
+                    <li class='nav-item'><a class='nav-link'>Symptoms</a></li>
+                    <li class='nav-item'><a class='nav-link'>Mental Health in Covid-19 Era</a></li>
+                    <li class='nav-item'><a class='nav-link'>Necessary Precautions</a></li>
+                    <li class='nav-item mr-5'><a class='nav-link'>Mythbusters</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!--Main Container-->
+        <div id='container' class="container-fluid">
+            <div class='row'>
+
+                <!--Sidebar-->
+                <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                    <div class="sidebar-sticky pt-3">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#title">
+                                    <span data-feather="home"></span>
+                                    Country Wise Statistics <span class="sr-only">(current)</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#global_section">
+                                    <span data-feather="file"></span>
+                                    Global statistics
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="home"></span>
+                                    Back to top
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+                <!--Main Graph and Buttons-->
+                <main id='main' role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap 
+                    align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+                        <!--Title-->
+                        <h2 id='title' class="h2 mr-3">Covid-19 Cases by Country (Confirmed)</h1>
+
+                        <!--Dropdown represnting countries list-->
+                        <div class="mr-auto dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Select a country
+                            </button>
+                            <div id='countries' class="scrollable-menu dropdown-menu" aria-labelledby="dropdownMenu2">
+                            </div>
+                        </div>
+
+                        <!--Group of three buttons-->
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <div class="btn-group mr-2">
+                                <button type="button" onclick="renderChart(document.getElementById('myChart').getAttribute('country'),(this.innerText.charAt(0).toLowerCase() + this.innerText.slice(1)))" 
+                                class="btn btn-sm btn-outline-secondary">Confirmed</button>
+                                <button type="button" onclick="renderChart(document.getElementById('myChart').getAttribute('country'),(this.innerText.charAt(0).toLowerCase() + this.innerText.slice(1)))"
+                                class="btn btn-sm btn-outline-secondary">Recovered</button>
+                                <button type="button" onclick="renderChart(document.getElementById('myChart').getAttribute('country'),(this.innerText.charAt(0).toLowerCase() + this.innerText.slice(1)))"
+                                class="btn btn-sm btn-outline-secondary">Deaths</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--Canvas Element Container for actual graph-->
+                    <canvas country='empty' class="my-4 w-100" id="myChart">Fuck you bitch</canvas>
+
+                    <hr id='breakpoint'>
+
+                    <!--Global Cases Section-->
+                    <p>
+                        <h2 id='global_section'>Global Cases</h2>
+                        <button class="btn btn-secondary dropdown-toggle" type="button"
+                            aria-haspopup="true" aria-expanded="false">
+                            Sort By
+                        </button>
+                    </p>
+                    <div class="table-responsive">
+
+                        <!--Table with global cases Statistics-->
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Country</th>
+                                    <th>New Confirmed</th>
+                                    <th>Total Confirmed</th>
+                                    <th>New Deaths</th>
+                                    <th>Total Deaths</th>
+                                    <th>New Recovered</th>
+                                    <th>Total Recovered</th>
+                                </tr>
+                            </thead>
+                            <tbody id='table'></tbody>
+                        </table>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+
+
+        <!-- Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+            crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+            crossorigin="anonymous"></script>
+        
+        <!-- Axios CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
+        <!--Feather and Graph-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+        
+        <!-- Custom script -->
+        <script>
+
+            //Initialize Feather icons
+
+            feather.replace()
+            
+
+            // Fetch list of countries
+
+            axios('https://api.covid19api.com/countries')
+                .then(res => {
+                    let countries = document.getElementById('countries');
+                    res.data.forEach(element => {
+                         countries.innerHTML += `<button id='${element.Slug}' class='dropdown-item' onclick='renderChart(this.id,"confirmed")'>
+                            ${element.Country}</button>`;
+                    });
+                });
+
+            // Function to render and update Chart
+
+            const renderChart = (country,status) => {
+
+                    if(country=='empty'){
+                        return;
+                    }
+
+                    // Erase the previous chart and create a new one 
+
+                    let ctx = document.getElementById('myChart');
+                    let breakpoint = document.getElementById('breakpoint');
+                    ctx.remove();
+                    ctx = document.createElement('canvas');
+                    ctx.id = 'myChart';
+                    ctx.className = 'my-4 w-100';
+                    let country_attribute = document.createAttribute("country");
+                    country_attribute.value = country;
+                    ctx.setAttributeNode(country_attribute);
+                    document.getElementById('main').insertBefore(ctx,breakpoint);
+
+                    // Update the dropdown and Title to reflect the current country and status
+
+                    document.getElementById('dropdownMenu2').innerText = country;
+                    document.getElementById('title').innerText = `Covid-19 Cases by Country (${(status.charAt(0).toUpperCase() + status.slice(1))})`;
+
+                    // Initialize the Labels and Data
+
+                    let labels = [];
+                    let data = [];
+
+                    // Fetch all the data for the selected country from day one and render chart
+
+                    axios(`https://api.covid19api.com/dayone/country/${country}/status/${status}`)
+                        .then(res => {
+                            data = res.data.map(({ Cases }) => Cases);
+                            labels = res.data.map(element => new Date(element.Date).toDateString());
+                            let myChart = new Chart(ctx, {
+                                type: 'line',
+                                data: {
+                                    labels: labels,
+                                    datasets: [{
+                                        data: data,
+                                        lineTension: 0,
+                                        backgroundColor: 'transparent',
+                                        borderColor: status=='deaths' ? '#333': status=='recovered' ? '#008000' : '#007bff',
+                                        borderWidth: 4,
+                                        pointBackgroundColor: '#007bff'
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        yAxes: [{
+                                            ticks: {
+                                                beginAtZero: false
+                                            }
+                                        }]
+                                    },
+                                    legend: {
+                                        display: false
+                                    }
+                                }
+                            })
+                        })
+                };
+
+                // Populate the Table containing all global statistics
+                axios('https://api.covid19api.com/summary')
+                    .then(res => {
+
+                        document.getElementById('global_section').innerText = `Global Cases as of ${new Date(res.data.Date).toDateString()}`;
+                        let table = document.getElementById('table');
+
+                        // Pull out country wise data as well as global data
+                        const { Countries , Global } = res.data
+
+                        // Populate Tablw with country wise data first
+                        Countries.reverse().forEach(country => {
+                            let row = table.insertRow(0);
+                            const { Country , NewConfirmed , TotalConfirmed , 
+                                NewDeaths , TotalDeaths , NewRecovered , TotalRecovered } = country;
+                            row.insertCell(0).innerText = Country;
+                            row.insertCell(1).innerText = NewConfirmed;
+                            row.insertCell(2).innerText = TotalConfirmed;
+                            row.insertCell(3).innerText = NewDeaths;
+                            row.insertCell(4).innerText = TotalDeaths;
+                            row.insertCell(5).innerText = NewRecovered;
+                            row.insertCell(6).innerText = TotalRecovered;
+                        })
+
+                        // Then Add global data at the top
+                        const { NewConfirmed, TotalConfirmed,
+                            NewDeaths, TotalDeaths, NewRecovered, TotalRecovered } = Global;
+                        let row = table.insertRow(0);
+                        row.insertCell(0).innerText = 'Global';
+                        row.insertCell(1).innerText = NewConfirmed;
+                        row.insertCell(2).innerText = TotalConfirmed;
+                        row.insertCell(3).innerText = NewDeaths;
+                        row.insertCell(4).innerText = TotalDeaths;
+                        row.insertCell(5).innerText = NewRecovered;
+                        row.insertCell(6).innerText = TotalRecovered;
+                    })
+
+        </script>
+
+    </body>
+</html>
