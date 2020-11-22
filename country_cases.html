@@ -291,11 +291,6 @@
                     let breakpoint = document.getElementById('breakpoint');
                     if(ctx!==null) {ctx.remove()}
 
-                    // Update title and dropdown names 
-
-                    document.getElementById('dropdownMenu2').innerText = country;
-                    document.getElementById('title').innerText = `Covid-19 Cases by Country (${(status.charAt(0).toUpperCase() + status.slice(1))})`;
-
                     // Initialize the Labels and Data
 
                     let labels = [];
@@ -311,6 +306,11 @@
                             if(res.data.length !== 0) {
 
                                 if(document.getElementById('myChart')!==null) {return;}
+
+                                // Update title and dropdown names 
+
+                                document.getElementById('dropdownMenu2').innerText = country;
+                                document.getElementById('title').innerText = `Covid-19 Cases by Country (${(status.charAt(0).toUpperCase() + status.slice(1))})`;
 
                                 // Create canvas element and insert into dom
 
@@ -362,6 +362,9 @@
                             else {
 
                                 if(document.getElementById('myChart')!==null) {return;}
+
+                                document.getElementById('dropdownMenu2').innerText = country;
+                                
                                 ctx = document.createElement('div');
                                 ctx.id = 'myChart';
                                 ctx.className = 'alert alert-warning'
