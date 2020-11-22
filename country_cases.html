@@ -291,6 +291,11 @@
                     let breakpoint = document.getElementById('breakpoint');
                     if(ctx!==null) {ctx.remove()}
 
+                    // Clear title and dropdown names 
+                    
+                    document.getElementById('dropdownMenu2').innerText = 'Select Country';
+                    document.getElementById('title').innerText = 'Covid-19 Cases by Country';
+
                     // Initialize the Labels and Data
 
                     let labels = [];
