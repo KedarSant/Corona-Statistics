@@ -12,6 +12,76 @@
         <!-- Custom styles -->
         <style>
 
+            /* Sidebar */
+
+            .sidebar {
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                z-index: 100; /* Behind the navbar */
+                padding: 75px 0 0; /* Height of navbar */
+                box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+            }
+
+            @media (max-width: 767.98px) {
+                .sidebar {
+                    top: 5rem;
+                }
+            }
+
+            .sidebar-sticky {
+                position: relative;
+                top: 0;
+                height: calc(100vh - 48px);
+                padding-top: .5rem;
+                overflow-x: hidden;
+                overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+            }
+
+            @supports ((position: -webkit-sticky) or (position: sticky)) {
+                .sidebar-sticky {
+                    position: -webkit-sticky;
+                    position: sticky;
+                }
+            }
+
+            .sidebar .nav-link {
+                font-weight: 500;
+                color: #333;
+            }
+
+            .sidebar .nav-link .feather {
+                margin-right: 4px;
+                color: #999;
+            }
+
+            .sidebar .nav-link.active {
+                color: #007bff;
+            }
+
+            .sidebar .nav-link:hover .feather,
+            .sidebar .nav-link.active .feather {
+                color: inherit;
+            }
+
+            .sidebar-heading {
+                font-size: .75rem;
+                text-transform: uppercase;
+            }
+
+            hr{
+                height: 10px;
+            }
+
+            .card {
+                transition: 0.2s;
+            }
+
+            .card:hover {
+                box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+                transform: translateY(-10px);
+            }
         </style>
     </head>
 
@@ -38,6 +108,204 @@
                 </div>
             </nav>
 
+            <div id='container' class="container-fluid">
+                <div class='row'>
+
+                    <!--Sidebar-->
+                    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                        <div class="sidebar-sticky pt-3">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#impact">
+                                        <span data-feather="file"></span>
+                                        Impact of Covid-19 on Mental Health
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#care">
+                                        <span data-feather="file"></span>
+                                        Taking good care of yourself
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#advice">
+                                        <span data-feather="file"></span>
+                                        Important Advice
+                                    </a>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <span data-feather="home"></span>
+                                        Back to top
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+
+
+                    <!--Main-->
+                    <main id='main' role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+                        <!--Impact Section-->
+                        <h1 class='mb-5 mt-3' id='impact'>Impact of Covid-19 on Mental Health</h1>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">It is triggering Anxiety and Depression</h5>
+                                        <p class="card-text">
+                                            Here are some of the ways :
+                                        <ul>
+                                            <li>"What is there's never a cure?"</li>
+                                            <li>Grief and loss for the "life that was" before coronavirus</li>
+                                            <li>Feeling trapped in quarantine</li>
+                                            <li>Feeling hopeless about the future</li>
+                                            <li>Feeling your attachment needs are threatened</li>
+                                            <li>Increased job insecurity</li>
+                                            <li>Increased survival model</li>
+                                            <li>Feelings of despair</li>
+                                            <li>Questioning your previous worldview (e.g maybe everything doesn't always work out)</li>
+                                            <li>Losing faith in humanity as others aren't taking the pandemic seriously</li>
+                                            <li>I don't know if I will get through this</li>
+                                            <li>This will never end</li>
+                                            <li>I have lost everything</li>
+                                            <li>Feeling helpless about current struggles (e.g financial)</li>
+                                            <li>Questioning Yourself</li>
+                                        </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Loneliness and Social Isolation</h5>
+                                        <p class="card-text">
+                                            Quarantine and social distancing are necessary measures to prevent the virus from spreading but also lead to elevated
+                                            levels of loneliness and social isolation, which in turn produce physical and mental health related repercussions.
+                                            Adopting appropriate steps to keep social and familial connections, maintain healthy activities, and manage emotions and
+                                            psychiatric symptoms can help relieve the adverse consequences of loneliness and isolation.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!--Taking good care of yourself Section-->
+                        <h1 class='mb-5 mt-3' id='care'>Taking good care of Yourself</h1>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Understand that everyone reacts to stress differently</h5>
+                                        <p class="card-text">
+                                            If you find someone coping with the pandemic better than  you are, don't be hard on yourself.
+                                            How you respond to stress during the COVID-19 pandemic can depend on your background, your social support from family or
+                                            friends, your financial situation, your health and emotional background, the community you live in, and many other
+                                            factors. Also conversely, if you find your friends/loved ones struggling, do try to look out for them.
+                                            However, no matter what, make yourself and your mental health a priority.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Maintain Social connections</h5>
+                                        <p class="card-text">
+                                            Taking care of your friends and your family can be a stress reliever, but it should be balanced with care for yourself.
+                                            Helping others cope with their stress, such as by providing social support, can also make your community stronger.
+                                            During times of increased social distancing, people can still maintain social connections and care for their mental
+                                            health. Phone calls or video chats can help you and your loved ones feel socially connected, less lonely, or isolated.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Ask for help</h5>
+                                        <p class="card-text">
+                                            Do not hesitate to ask your friends/loved ones for help. Asking for help is not a sign 
+                                            of weakness. If they aren't able to help you, seek out professional help without 
+                                            associating any shame/stigma with it.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Don't Neglect your health</h5>
+                                        <p class="card-text">
+                                            Healthy ways to cope with stress
+                                            <ul>
+                                                <li>Take care of your emotional health by connecting with others,taking breaks etc.</li>
+                                                <li>Take breaks from watching, reading, or listening to news stories, including those on social media. Hearing about the
+                                                pandemic repeatedly can be upsetting.</li>
+                                                <li>Get plenty of sleep</li>
+                                                <li>Exercise Regularly</li>
+                                                <li>Eat healthy</li>
+                                                <li>Take some time out to pursue enjoyable activites or a hobby</li>
+                                            </ul>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr>
+
+                        <!--Important Advice section-->
+                        <h1 class='mb-5 mt-3' id='advice'>Important Advice</h1>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12">
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">It is normal to feel fearful and anxious during this time.​</h5>
+                                        <p class="card-text">
+                                            Talking about your feelings will lessen your distress.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Set a time when you will check COVID-19 updates, and limit how long you spend reading or watching them each day.​​</h5>
+                                        <p class="card-text">
+                                            It is important to spend time doing things you enjoy and find relaxing.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">If you feel stressed and overwhelmed, talk to your colleagues or supervisor about your feelings and challenges.​</h5>
+                                        <p class="card-text">
+                                            Frontline and other essential workers can protect their #MentalHealth by accessing on-site or remote services (e.g.
+                                            telehealth) for therapy, advice and other forms of support. ​
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="card text-white bg-info mb-3" width="100%" height="100%">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Maintaining connections between people diagnosed with COVID-19 and their loved ones can help protect their mental
+                                        health.​</h5>
+                                        <p class="card-text">
+                                            People diagnosed with Covid-19 deserve compassionate care. Helping them stay connected
+                                            to their loved ones by phone,video or messaging can provide comfort during isolation.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </main>
+                </div>
+            </div>
+
+
             
 
             <!-- Bootstrap JS -->
@@ -51,10 +319,17 @@
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
                 crossorigin="anonymous"></script>
 
+            <!--Feather and Graph-->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
+
             <!--Custom Script-->
             <script>
 
+                feather.replace()
+
             </script>
+
+
         </header>
 
     </body>
